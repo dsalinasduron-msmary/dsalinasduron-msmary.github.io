@@ -43,19 +43,34 @@ My intuition: a \(k\)-simplex is flat, convex, and resembles the boundary of
 <h3>Definition: Simplex</h3>
 
 <p>A \(k\)-simplex is the convex hull of \(k\) + 1 affinely independent
-points.</p> <img src="fig1.png" width="100%">
+points.</p> <img src="fig1.png" width="600px">
 
 <h3>Definition: Convexity and Affine Independence </h3>
 
-<p>Let \(u_0, ..., u_k\) be affinely independent points. A point \[ x = \sum_i
-\lambda_i u_i \] is a convex combination if all \(\lambda_i\) sum to 1 and are
-greater than 0.</p>
+<p>Let \(U\) be a set \(u_0, ..., u_k\) affinely independent points. A point \[
+x = \sum_i \lambda_i u_i \] is a convex combination if all \(\lambda_i\) sum to
+1 and are greater than 0. The set of convex combinations is the convex
+hull.</p>
 
 <p>A set of points is affinely independent points if the member \(u_i\) cannot
-be generated as an affine combination of the  rest of the members \(u_j,\:j \neq
-i \). The book gives this definition as an equivalence requirement:</p>
+be generated as an affine combination of the  rest of the members \(u_j,\:j
+\neq i \). The book gives this definition as an equivalence requirement: \[
+\sum_i \lambda_i u_i = \sum_i \mu_i u_i \iff \forall i, \: \lambda_i = \mu_i
+\]</p>
 
-\[ \sum_i \lambda_i u_i = \sum_i \mu_i u_i \iff \forall i, \: \lambda_i = \mu_i \]
+
+<h3>Recursivity of Simplices</h3>
+
+<p>Any subset of \(U\) will also be affinely independent. A simplex is composed of smaller simplices.</p>
+
+<h3>Definitions: Face and Boundary</h3>
+
+<p>The convex hull of \(U - u_i\) is a face of the convex hull of \(U\).</p>
+
+<img src="fig1.png" width="600px">
+
+<p>The boundary of a simplex is the union of all its faces.</p>
+
 
 </body>
 </html>
