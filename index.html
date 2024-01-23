@@ -23,18 +23,22 @@
 <p>I am currently Data Science faculty at <a href="https://msmary.edu/">Mount
 St.  Mary's University</a> in Maryland.</p>
 
-<p>I graduated from Montana State University in 2018, and was <a
+<p>I graduated from Montana State University in 2018 and was <a
 href="https://www.cs.montana.edu/tda/people.html">part</a> of the Computational
 Geometry and Topology group.</p>
 
 <h1>Introduction</h1>
 
-<p><i>Ideas, definitions, and figures are all taken from
-	<a href="https://bookstore.ams.org/mbk-69">E&amp;H</a> Ch. 3</i></p>
+<p><i>Ideas, definitions, and figures are all taken from <a
+		href="https://bookstore.ams.org/mbk-69">E&amp;H</a> Ch. 3</i>
+unless otherwise stated.</p>
 
 <p> We care about simplicial complexes because they allow us to describe a
 complicated space in terms of simple components. Simple components allow for
 easier compute. A simplex is a very simple component. </p>
+
+<img src="fig0.png" width="600px">
+<p>This figure is from Ch. 2</p>
 
 <h2>Simplex</h2>
 
@@ -55,7 +59,7 @@ hull.</p>
 
 <p>A set of points is affinely independent points if the member \(u_i\) cannot
 be generated as an affine combination of the  rest of the members \(u_j,\:j
-\neq i \). The book gives this definition as an equivalence requirement: \[
+\neq i \). E&amp;H gives this definition as an equivalence requirement: \[
 \sum_i \lambda_i u_i = \sum_i \mu_i u_i \iff \forall i, \: \lambda_i = \mu_i
 \]</p>
 
@@ -71,6 +75,26 @@ be generated as an affine combination of the  rest of the members \(u_j,\:j
 <img src="fig1.png" width="600px">
 
 <p>The boundary of a simplex is the union of all its faces.</p>
+
+<h2>Simplicial Complex</h2>
+
+<p>My intuition: a simplicial complex is a bunch of simplices attached at their
+faces. E&amp;H clarify that this produces a closure under taking faces and
+prevents improper intersections.</p>
+
+<h3>Definition: Simplicial Complex</h3>
+
+<p>From E&amp;H p. 75<p>
+
+<blockquote>A simplicial complex \(K\) is a finite collection of simplices such
+	that \(\sigma \in K\) and \(\tau \leq \sigma\) implies \(\tau \in K\)
+</blockquote>
+<p>... this is the closure under taking faces ... </p>
+<blockquote>
+	and \(\sigma, \sigma_0 \in K\) implies \(\sigma \cap \sigma_0\) is either empty or a face of both
+</blockquote>
+<p> ... this forbids the improper intersections ... </p>
+
 
 
 </body>
