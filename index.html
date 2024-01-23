@@ -29,9 +29,33 @@ Geometry and Topology group.</p>
 
 <h1>Introduction</h1>
 
+<p><i>Ideas, definitions, and figures are taken from E&amp;H Ch. 3</i></p>
+
+<p> We care about simplicial complexes because they allow us to describe a
+complicated space in terms of simple components. Simple components allow for
+easier compute. A simplex is a very simple component. </p>
+
 <h2>Simplex</h2>
 
-Intuition: a simplex is 1) flat and 2) has one less dimension that its ambient space.
+My intuition: a \(k\)-simplex is flat, convex, and resembles the boundary of
+\(k+1\)-dimensional polyhedron. It is a minimal object.
+
+<h3>Definition: Simplex</h3>
+
+<p>A \(k\)-simplex is the convex hull of \(k\) + 1 affinely independent
+points.</p> <img src="fig1.png" width="100%">
+
+<h3>Definition: Convexity and Affine Independence </h3>
+
+<p>Let \(u_0, ..., u_k\) be affinely independent points. A point \[ x = \sum_i
+\lambda_i u_i \] is a convex combination if all \(\lambda_i\) sum to 1 and are
+greater than 0.</p>
+
+<p>A set of points is affinely independent points if the member \(u_i\) cannot
+be generated as an affine combination of the  rest of the members \(u_j,\:j \neq
+i \). The book gives this definition as an equivalence requirement:</p>
+
+\[ \sum_i \lambda_i u_i = \sum_i \mu_i u_i \iff \forall i, \: \lambda_i = \mu_i \]
 
 </body>
 </html>
