@@ -1,134 +1,20 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Simplicial Complexes</title>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css">
-  <style>
-    body {
-      font-family: "Computer Modern Serif", serif;
-    }
-  </style>
+<title>Daniel's Assorted Notes</title>
 </head>
 <body>
+	<h1>Notes</h1>
 
-<h1>Prelude</h1>
+	<p>As of now, my GitHub page is a way for me to easily share material
+	with others and keep track of links I find useful.</p> 
 
-<p>I am currently Data Science faculty at <a href="https://msmary.edu/">Mount
-St.  Mary's University</a> in Maryland.</p>
+	<p>Check out my <a
+		href="https://scholar.google.com/citations?user=88ZExckAAAAJ&hl=en&oi=ao">
+		Google Scholar page</a> to get to know me a little better. </p>
 
-<p>I graduated from Montana State University in 2018 and was <a
-href="https://www.cs.montana.edu/tda/people.html">part</a> of the Computational
-Geometry and Topology group.</p>
-
-<h1>Introduction</h1>
-
-<p><i>Ideas, definitions, and figures are all taken from <a
-		href="https://bookstore.ams.org/mbk-69">E&amp;H</a> Ch. 3</i>
-unless otherwise stated.</p>
-
-<p> We care about simplicial complexes because they allow us to describe a
-complicated space in terms of simple components. Simple components allow for
-easier compute. A simplex is a very simple component. </p>
-
-<img src="fig0.png" width="600px">
-<p>This figure is from Ch. 2</p>
-
-<h2>Simplex</h2>
-
-My intuition: a \(k\)-simplex is flat, convex, and resembles the boundary of
-\(k+1\)-dimensional polyhedron. It is a minimal object.
-
-<h3>Definition: Simplex</h3>
-
-<p>A \(k\)-simplex is the convex hull of \(k\) + 1 affinely independent
-points.</p> <img src="fig1.png" width="600px">
-
-<h3>Definition: Convexity and Affine Independence </h3>
-
-<p>Let \(U\) be a set \(u_0, ..., u_k\) affinely independent points. A point \[
-x = \sum_i \lambda_i u_i \] is a convex combination if all \(\lambda_i\) sum to
-1 and are greater than 0. The set of convex combinations is the convex
-hull.</p>
-
-<p>A set of points is affinely independent points if the member \(u_i\) cannot
-be generated as an affine combination of the  rest of the members \(u_j,\:j
-\neq i \). E&amp;H gives this definition as an equivalence requirement: \[
-\sum_i \lambda_i u_i = \sum_i \mu_i u_i \iff \forall i, \: \lambda_i = \mu_i
-\]</p>
-
-
-<h3>Recursivity of Simplices</h3>
-
-<p>Any subset of \(U\) will also be affinely independent. A simplex is composed of smaller simplices.</p>
-
-<h3>Definitions: Face and Boundary</h3>
-
-<p>The convex hull of \(U - u_i\) is a face of the convex hull of \(U\).</p>
-
-<img src="fig1.png" width="600px">
-
-<p>The boundary of a simplex is the union of all its faces.</p>
-
-<h2>Simplicial Complex</h2>
-
-<p>My intuition: a simplicial complex is a bunch of simplices attached at their
-faces. E&amp;H clarify that this produces a closure under taking faces and
-prevents improper intersections.</p>
-
-<h3>Definition: Simplicial Complex</h3>
-
-<p>From E&amp;H p. 75<p>
-
-<blockquote>A simplicial complex \(K\) is a finite collection of simplices such
-	that \(\sigma \in K\) and \(\tau \leq \sigma\) implies \(\tau \in K\)
-</blockquote>
-<p>... this is the closure under taking faces ... </p>
-<blockquote>
-	and \(\sigma, \sigma_0 \in K\) implies \(\sigma \cap \sigma_0\) is either empty or a face of both
-</blockquote>
-<p> ... this forbids the improper intersections ... </p>
-
-<h3>Abstract Simplicial Complex</h3>
-
-<p>Although motivated by affine transformations in Euclidean space, simplicial
-complexes can be studied productively as a finite collection of sets \(A\)
-where all subsets of its members are included in \(A\). So, if \(\alpha\) is a
-member of \(A\) and \(\beta\) is a subset of \(\alpha\), then \(\beta\) is also
-in \(A\). This encodes the inclusion of faces. </p>
-
-<h2>Theorems</h2>
-
-<h3>Theorem: Geometric Realization Theorem</h3>
-
-<p>Any abstract simplicial complex of dimension \(d\) has a realization in
-\(\mathbb{R}^{2d+1}\)</p>
-
-<h3>Interlude</h3>
-
-<a href="https://colab.research.google.com/drive/1_wBnlr5M3INm4OBFMpcZkN4P8YqmAH7v?usp=sharing">Active Learning Colab Break</a>
-
-
-<h3>Simplicial Approximation Theorem</h3>
-
-<p>From E&amp;H p. 79</p>
-
-<blockquote>If \(g: |K| \rightarrow |L|\) is continous, then there is a
-	sufficiently large integer \(n\) such that \(g\) has a simplicial
-	approximation \(f:Sd^nK \rightarrow L\)</blockquote>
-
-<p>Intuition: if there is a continous map between the elements in \(|K|\) and \(|L|\), we can subdivide \(K\) into small enough simplices to map simplices in \(L\). </p>
-
-<img src="subdivision.png" width="600px">
-<img src="map.png" width="600px">
-
-<p>Discussion question: What is an easy way to define a mapping between two simplicial complexes?</p>
-
+	<ul>
+	<li><a href="comptop_jan23/index.html">Computational Topology Guest Lecture</a></li>
+	<li><a href="https://ljvmiranda921.github.io/notebook/2018/01/31/running-a-jupyter-notebook/">SSHing into a remote Jupyter Notebook</a></li>
+	<ul>
 </body>
-</html>
+<html>
