@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>hyena dna notes</title>
+</head>
+<body>
+
+<h1>Notes on Pretraining Soy</h1>
+
+<ol>
+
+<h2>Data Preprocessing</h2>
+
+<li>
+Change the extension from nt to fa
+</li>
+
+<li>
+Move fa into wdr/data/soy
+</li>
+
+<li> generate a bed file from a fasta using <a
+		href="https://bioinformatics.stackexchange.com/questions/91/how-to-convert-fasta-to-bed">pyfaidx</a>
+</li>
+
+<h2>Set up configs</h2>
+<h3>experiment folder</h3>
+<li>Make the experiment file inside /wdr/configs/experiment/soy. This was
+	copied from hg38_hyena.yaml Change pipeline to "soy" in line 3.</li>
+<h3>dataset folder</h3>
+
+<li>Modify the wdr/src/dataloaders/datasets/species_dataset.py file per the <a
+		href="https://github.com/HazyResearch/hyena-dna?tab=readme-ov-file#pretraining-on-your-own-data">pretraining
+		instructions</a>.
+	In the file split the data into training, testing, and validation sets.
+	The split is done chromosome-wise. So 11 chromosomes were set aside for
+training, 4 were set aside for validation, and 5 were set aside for testing. </li>
+
+<li>Create the dataset config file for soy in /wdr/configs/dataset. This is
+	based off of /wdr/configs/dataset/hg38.yaml. Add reference to soy fa
+	file and bed file. </li>
+
+<h3>pipeline folder</h3>
+
+<li>Copy /wdr/configs/pipeline/hg38.yaml into soy.yaml Change dataset to soy. </li>
+
+<h3>evals folder</h3>
+
+<li>Copy /home/dsalinas/wdr/configs/hg38.yaml into soy.yaml. No modifications made. Tokenizer could be changed. </li>
+
+<li>Make a SoyDataset class in soy_dataset.py file in src/dataloaders/datasets folder. This was based on the hg38_dataset.py file provided. Name of class was changed.</li>
+
+<li>In src/dataloaders/genomics.py, add reference to the SoyDataset class
+	created in src/datloaders/datasets/soy_dataset.py in the imports. Then
+	make a class Soy based on the HG38 class in the same file. Make sure you set the bedfile and fa file default paths </li>
+
+</ol>
+
+</body>
+</html>
