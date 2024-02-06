@@ -4,59 +4,36 @@
 </head>
 <body>
 
-<h1>Notes on Pretraining Soy</h1>
+<h1>Soy Pretraining</h1>
+The main point is getting this line of code to work with a soy dataset
+
+<pre>
+python -m train wandb=null experiment=hg38/hg38_hyena model.d_model=128 model.n_layer=2 dataset.batch_size=256 train.global_batch_size=256 dataset.max_length=1024 optimizer.lr=6e-4 trainer.devices=1
+</pre>
+<a href="https://github.com/HazyResearch/hyena-dna?tab=readme-ov-file#pretraining-on-human-reference-genome">source</a>
 
 <ol>
-
-<h2>Data Preprocessing</h2>
-
 <li>
-Change the extension from nt to fa
+Start off by replicating the hg38/hg38_hyena experiment file 
 </li>
-
 <li>
-Move fa into wdr/data/soy
+hg38_hyena references the hg38.yaml pipeline file. make a soy pipeline file. pipeline file refernces the dataset to be used, metrics, and other. change dataset to soy
 </li>
-
-
-<h2>Set up configs</h2>
-<h3>experiment folder</h3>
-<li>Make the experiment file inside /wdr/configs/experiment/soy. This was
-	copied from hg38_hyena.yaml Change pipeline to "soy" in line 3.</li>
-<h3>dataset folder</h3>
-
-<li>Make a SoyDataset class in soy_dataset.py file in src/dataloaders/datasets folder. This was based on the species_classification.py file provided.
-Modify the wdr/src/dataloaders/datasets/species_dataset.py file per the <a
-		href="https://github.com/HazyResearch/hyena-dna?tab=readme-ov-file#pretraining-on-your-own-data">pretraining
-		instructions</a>.
-
-	In the file split the data into training, testing, and validation sets.
-	The split is done chromosome-wise. So 11 chromosomes were set aside for
-training, 4 were set aside for validation, and 5 were set aside for testing.
-Use a single species (soy) instead of multiple. Change the task to
-"next_token_pred" only. </li>
-
-<li>Create the dataset config file for soy in /wdr/configs/dataset. This is
-	based off of /wdr/configs/dataset/hg38.yaml. Add reference to soy fa
-	file and bed file. </li>
-
-<h3>pipeline folder</h3>
-
-<li>Copy /wdr/configs/pipeline/hg38.yaml into soy.yaml Change dataset to soy. </li>
-
-<h3>evals folder</h3>
-
-<li>Copy /home/dsalinas/wdr/configs/hg38.yaml into soy.yaml. No modifications made. Tokenizer could be changed. </li>
-
-
-<li>In src/dataloaders/genomics.py, add reference to the SoyDataset class
-	created in src/datloaders/datasets/soy_dataset.py in the imports. Then
-	make a class Soy based on the Secies class in the same file. Update
-task to be "next_token_pred". update _name_ to soy.</li>
-
-<p> need insight on total_size in soy.yaml should prob do a clean redo honestly.</p>
-
-</ol>
-
+<li>
+the pretraining task will require putting soy sequences in the **data** folder. but, really the emphasis is on getting the dataloader to work, as clarified here <a href="https://github.com/HazyResearch/hyena-dna?tab=readme-ov-file#pretraining-on-your-own-data">https://github.com/HazyResearch/hyena-dna?tab=readme-ov-file#pretraining-on-your-own-data</a> they recommend inspecting the species_dataset.py dataloader 
+</li>
+<li>
+so go into src/dataloaders. the species dataloader is defined in datasets module <code>genomics.py</code> defines a class based on that dataset. the dataset and dataloader constructs are from pytorch <a href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html">https://pytorch.org/tutorials/beginner/basics/data_tutorial.html</a>
+    
+   <blockquote> `Dataset` stores the samples and their corresponding labels, and `DataLoader` wraps an iterable around
+    the `Dataset` to enable easy access to the samples.
+    </blockquote> 
+    
+    The dataset is defined in <code>datasets/soy_dataset.py</code> The associated dataloader is defined in <code>genomics.py</code> (that is where all the other dataloaders are). NOTE: The authors seem to be using the task lm and task next_token_pred to mean the same thing: (predictive) language modeling = predicting the next token. I’m unsure why both terms are used. however, I don’t want to update the experiment config just yet because I sense that the task is being used elsewhere (e.g. task/lm.yaml and trainer/lm.yaml).
+</li>
+    
+<li>
+configs/datasets/soy.yaml needs to be updated to have a species, species_dir, and total_size that are required by the dataloader. I am not sure what total_size is at this moment, but we will use the same value as species.yaml
+</li>
 </body>
 </html>
