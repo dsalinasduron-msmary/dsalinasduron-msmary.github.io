@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>
+minikubes notes
+</title>
+</head>
+<body>
+
+<p><code>minikube</code> start will initialize a local kubes cluster.
+<code>kubectl</code> will be configured by minikube start to refer to the
+cluster that it started. </p>
+
+<h2>making the dashboard accessible</h2>
+ 
+<p><code>minikube dashboard --port X --url=True</code> will startup a
+browser-accessible GUI on the desired port. however, this is in the <a
+href="https://en.wikipedia.org/wiki/Localhost">loopback</a> address
+(127.0.0.1), so this is not accessible non-locally (e.g. browsers on the same
+LAN cannot acccess this). to circumvent, use <code>ssh -L
+localhost:YYYY:localhost:XXXX</code> to map the dashboard port to a port local
+to the computer on the LAN.</p>
+
+<p> kubernetes is meant to be self-healing. that means it needs to know how to
+spin up new instances of your app. it also needs to know how to create the
+initial instance. this information is in the <b>deployment</b>. Information on
+how to make a new deployment <a
+href="https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/"> here</a>.</p>
+
+<h2>deployment basics</h2>
+
+<p><b>pod</b> is a group of containers spawned by a deployment, jointly
+administered and networked; a <b>deployment</b> is a way to manage pods,
+including restarting containers when they come down.</p>
+
+<p> let's break down the command <pre>kubectl create deployment NAME
+--image=XXXX </pre> the  create subcommand makes a new resource, anything from
+a user to a service. NAME is the name of the deployment itself, and XXXX is a
+docker image. the deployment starts a new pod.</p>
+
+
+</body>
+</html>
