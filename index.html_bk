@@ -1,0 +1,21 @@
+<html>
+<head>
+<title>Daniel's Assorted Notes</title>
+</head>
+<body>
+	<h1>Notes</h1>
+
+	<p>As of now, my GitHub page is a way for me to easily share material
+	with others and keep track of links I find useful.</p> 
+
+	<p>Check out my <a
+		href="https://scholar.google.com/citations?user=88ZExckAAAAJ&hl=en&oi=ao">
+		Google Scholar page</a> to get to know me a little better. </p>
+
+	<ul>
+	<li><a href="comptop_jan23/index.html">Computational topology guest lecture</a></li>
+	<li><a href="hyena/index.html">Notes on pretraining hyena</a>.</li>
+        <li><a href="ssh/index.html">SSH guides</a></li>
+	<ul>
+</body>
+<html>
