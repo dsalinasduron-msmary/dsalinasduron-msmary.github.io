@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>hyena dna notes</title>
+</head>
+<body>
+
+<h1>Running a Custom Hyena Experiment</h1>
+<h2>End Goal</h2>
+
+<p>Let's start at the end. The essential line, <i>sine qua non</i>, is as follows:</p>
+<pre>
+python -m train experiment={d}/{f}
+</pre>
+
+<p>where <code>d</code> is the directory where the experiment <code>yaml</code>
+file <code>f</code> is defined. Directory <code>d</code> is inside the
+<code>experiment</code> directory.</p> 
+
+For more command line options see
+<a href="https://github.com/HazyResearch/hyena-dna?tab=readme-ov-file#pretraining-on-human-reference-genome">[0]</a>.
+
+<h2>Making <code>f</code></h2>
+
+<p>In <code>experiment</code> folder, create <code>f.yaml</code> specifying a
+pipeline and a model.</p>
+<h3>Using a pre-made model.yaml file</h3>
+<pre>
+# @package _global_
+defaults:
+  - /pipeline: {p}
+  - /model: {m}
+
+</pre>
+
+<h3>Defining a pre-made model.yaml file within <code>f</code></h3>
+<pre>
+# @package _global_
+model:
+  _name_: lm
+  ... other parameters
+</pre>
+
+The model can be specified explicitly within <code>f.yaml</code>:
+<pre>
+# @package _global_
+defaults:
+  - /pipeline: {p}
+</pre>
+
+<h2>Making <code>m</code></h2>
+
+<p></p>
+
+<ol>
+<li>
+hg38_hyena references the hg38.yaml pipeline file. make a soy pipeline file. pipeline file refernces the dataset to be used, metrics, and other. change dataset to soy
+</li>
+<li>
+the pretraining task will require putting soy sequences in the **data** folder. but, really the emphasis is on getting the dataloader to work, as clarified here <a href="https://github.com/HazyResearch/hyena-dna?tab=readme-ov-file#pretraining-on-your-own-data">https://github.com/HazyResearch/hyena-dna?tab=readme-ov-file#pretraining-on-your-own-data</a> they recommend inspecting the species_dataset.py dataloader 
+</li>
+<li>
+so go into src/dataloaders. the species dataloader is defined in datasets module <code>genomics.py</code> defines a class based on that dataset. the dataset and dataloader constructs are from pytorch <a href="https://pytorch.org/tutorials/beginner/basics/data_tutorial.html">https://pytorch.org/tutorials/beginner/basics/data_tutorial.html</a>
+    
+   <blockquote> `Dataset` stores the samples and their corresponding labels, and `DataLoader` wraps an iterable around
+    the `Dataset` to enable easy access to the samples.
+    </blockquote> 
+    
+    The dataset is defined in <code>datasets/soy_dataset.py</code> The associated dataloader is defined in <code>genomics.py</code> (that is where all the other dataloaders are). NOTE: The authors seem to be using the task lm and task next_token_pred to mean the same thing: (predictive) language modeling = predicting the next token. I’m unsure why both terms are used. however, I don’t want to update the experiment config just yet because I sense that the task is being used elsewhere (e.g. task/lm.yaml and trainer/lm.yaml).
+</li>
+    
+<li>
+configs/datasets/soy.yaml needs to be updated to have a species, species_dir, and total_size that are required by the dataloader. I am not sure what total_size is at this moment, but we will use the same value as species.yaml
+</li>
+</body>
+</html>
